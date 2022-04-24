@@ -30,12 +30,18 @@ public class BookFormController {
     }
 
     @PostMapping("add")
-    @ResponseBody
     public String saveNewBook(@ModelAttribute("book") Book book) {
         bookDao.saveBook(book);
 
-        return "OK";
+        return "redirect:/bookForm/all";
     }
+
+    @GetMapping("all")
+    public String showAllBooks(Model model) {
+        model.addAttribute("books", bookDao.findAll());
+        return "bookForm-all";
+    }
+
 
     @ModelAttribute("publishers")
     public List<Publisher> getAllPublishers() {
