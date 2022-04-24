@@ -15,12 +15,12 @@
 </head>
 <body>
 
-    <form method="post" action="person">
-        Login: <input type="text" name="login"> </br>
-        Email: <input type="email" name="email"> </br>
-        Password: <input type="password" name="password"> </br>
+    <form:form method="post" action="person" modelAttribute="person">
+        Login: <form:input type="text" path="login"/> </br>
+        Email: <form:input type="email" path="email"/> </br>
+        Password: <form:input type="password" path="password"/> </br>
         <input type="submit">
-    </form>
+    </form:form>
 
 </body>
 </html>
