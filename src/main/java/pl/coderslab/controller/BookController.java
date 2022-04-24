@@ -1,6 +1,7 @@
 package pl.coderslab.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.model.Book;
 import pl.coderslab.model.Publisher;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class BookController {
@@ -19,9 +21,11 @@ public class BookController {
     @GetMapping("add")
     @ResponseBody
     public String addBook() {
+        log.info("Add new book");
         Publisher publisher = new Publisher();
         publisher.setName("Dominik");
         publisherDao.save(publisher);
+        log.info("Added publisher to db, new id: {}", publisher.getId());
 
         Book book = new Book();
         book.setPublisher(publisher);
