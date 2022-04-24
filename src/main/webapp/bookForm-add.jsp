@@ -24,6 +24,9 @@
         <form:select path="publisher.id" itemValue="id"
                      itemLabel="name" items="${publishers}"/> </br>
 
+        <form:select path="authors" itemValue="id"
+                     itemLabel="fullName" items="${authors}"/> </br>
+
         <input type="submit">
     </form:form>
 

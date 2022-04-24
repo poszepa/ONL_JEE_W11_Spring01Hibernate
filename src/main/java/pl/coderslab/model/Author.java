@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Getter
 @Setter
@@ -25,4 +26,9 @@ public class Author {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Transient
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

@@ -5,11 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.dao.BookDao;
 import pl.coderslab.dao.PublisherDao;
+import pl.coderslab.model.Author;
 import pl.coderslab.model.Book;
 import pl.coderslab.model.Publisher;
 
@@ -21,6 +25,7 @@ import java.util.List;
 public class BookFormController {
 
     private final BookDao bookDao;
+    private final AuthorDao authorDao;
     private final PublisherDao publisherDao;
 
     @GetMapping("add")
@@ -42,9 +47,23 @@ public class BookFormController {
         return "bookForm-all";
     }
 
+    // localhost:8080/bookForm/edit/2
+    @GetMapping("edit/{id}")
+    public String editBook(@PathVariable("id") long id,
+                           Model model) {
+        Book book = bookDao.findById(id);
+        model.addAttribute("book", book);
+        return "bookForm-edit";
+    }
+
 
     @ModelAttribute("publishers")
     public List<Publisher> getAllPublishers() {
         return publisherDao.findAll();
+    }
+
+    @ModelAttribute("authors")
+    public List<Author> getAllAuthors() {
+        return authorDao.findAll();
     }
 }

@@ -39,6 +39,7 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(name = "books_authors",
             joinColumns = @JoinColumn(name = "book_id"),
