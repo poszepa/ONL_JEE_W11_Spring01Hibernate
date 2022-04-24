@@ -1,7 +1,9 @@
 package pl.coderslab.dao;
 
 import org.springframework.stereotype.Repository;
+import pl.coderslab.model.Author;
 import pl.coderslab.model.Book;
+import pl.coderslab.model.Publisher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,6 +43,22 @@ public class BookDao {
         return entityManager
                 .createQuery("SELECT b FROM Book b WHERE b.rating = :rating")
                 .setParameter("rating", rating)
+                .getResultList();
+    }
+
+    public List<Book> getBooksWhichHaveAPublisher() {
+        return entityManager.createQuery("SELECT b FROM Book b JOIN b.publisher").getResultList();
+    }
+
+    public List<Book> getBooksForPublisher(Publisher publisher) {
+        return entityManager.createQuery("SELECT b FROM Book b WHERE b.publisher = :publisher")
+                .setParameter("publisher", publisher)
+                .getResultList();
+    }
+
+    public List<Book> getBooksForAuthor(Author author) {
+        return entityManager.createQuery("SELECT DISTINCT b FROM Book b JOIN FETCH b.authors WHERE :author MEMBER OF b.authors")
+                .setParameter("author", author)
                 .getResultList();
     }
 }
