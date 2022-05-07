@@ -23,4 +23,10 @@ public class SpringDAtaBookController {
         List<Book> all = bookRepository.findAll();
         all.forEach(book -> log.info("{}", book.getId()));
     }
+
+    @GetMapping("findByTitle")
+    public void findByTitle(){
+        List<Book> all = bookRepository.findBookByTitle("wqeqwrq");
+        all.forEach(book -> log.info("{}", book.toString()));
+    }
 }
