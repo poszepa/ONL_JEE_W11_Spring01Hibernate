@@ -12,13 +12,11 @@ import javax.validation.constraints.Size;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 1, max = 100)
     @NotNull
     private String title;
 
-    @OneToOne(mappedBy = "category")
-    private Book book;
 }

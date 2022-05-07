@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
+import org.hibernate.mapping.ToOne;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -50,6 +51,7 @@ public class Book {
     @Min(2)
     private int pages;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 }
