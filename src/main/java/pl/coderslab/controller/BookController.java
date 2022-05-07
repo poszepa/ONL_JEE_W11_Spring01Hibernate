@@ -10,6 +10,7 @@ import pl.coderslab.dao.BookDao;
 import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.model.Book;
 import pl.coderslab.model.Publisher;
+import pl.coderslab.repository.BookRepository;
 
 @Slf4j
 @Controller
@@ -17,6 +18,8 @@ import pl.coderslab.model.Publisher;
 public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
+    private final BookRepository bookRepository;
+
 
     @GetMapping("add")
     @ResponseBody
@@ -26,7 +29,6 @@ public class BookController {
         publisher.setName("Dominik");
         publisherDao.save(publisher);
         log.info("Added publisher to db, new id: {}", publisher.getId());
-
         Book book = new Book();
         book.setPublisher(publisher);
         book.setTitle("Title 1");

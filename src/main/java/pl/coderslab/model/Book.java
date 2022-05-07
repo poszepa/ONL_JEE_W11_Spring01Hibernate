@@ -49,4 +49,7 @@ public class Book {
 
     @Min(2)
     private int pages;
+
+    @OneToOne
+    private Category category;
 }
